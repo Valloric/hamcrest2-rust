@@ -101,27 +101,12 @@ fn contains_in_order<T: fmt::Debug + PartialEq>(
   actual: &[T],
   items: &[T],
 ) -> bool {
-  let mut previous = None;
-
-  for item in items.iter() {
-    match actual.iter().position(|a| *item == *a) {
-      Some(current) => {
-        if !is_next_index(current, &previous) {
-          return false;
-        }
-        previous = Some(current);
-      }
-      None => return false,
+  for start_idx in 0..=(actual.len() - items.len()) {
+    if items == &actual[start_idx..start_idx + items.len()] {
+      return true;
     }
   }
-  true
-}
-
-fn is_next_index(current_index: usize, previous_index: &Option<usize>) -> bool {
-  if let Some(index) = *previous_index {
-    return current_index == index + 1;
-  }
-  true
+  false
 }
 
 /// Creates matcher that checks if actual data contains give item(s).

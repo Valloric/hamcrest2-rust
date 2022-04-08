@@ -40,7 +40,11 @@ mod contains {
 
   #[test]
   fn it_contains_elements_in_order() {
+    // Sanity check.
     assert_that!(&[1, 2, 3], contains(vec![1, 2]).in_order());
+    // Repeated element / sequences.
+    assert_that!(&[1, 1, 1], contains(vec![1, 1]).in_order());
+    assert_that!(&[1, 2, 1, 2], contains(vec![2, 1, 2]).in_order());
   }
 
   #[test]
