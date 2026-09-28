@@ -56,7 +56,7 @@ impl<'a> Matcher<&'a PathBuf> for PathExists {
   }
 }
 
-impl<'a> Matcher<&'a Path> for PathExists {
+impl Matcher<&Path> for PathExists {
   fn matches(&self, actual: &Path) -> MatchResult {
     expect(
       fs::metadata(actual).is_ok(),

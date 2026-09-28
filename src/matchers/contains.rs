@@ -68,7 +68,7 @@ impl<T: fmt::Debug> fmt::Display for Contains<T> {
   }
 }
 
-impl<'a, T: fmt::Debug + PartialEq + Clone> Matcher<&'a [T]> for Contains<T> {
+impl<T: fmt::Debug + PartialEq + Clone> Matcher<&[T]> for Contains<T> {
   fn matches(&self, actual: &[T]) -> MatchResult {
     let mut rem = actual.to_vec();
 
@@ -77,7 +77,7 @@ impl<'a, T: fmt::Debug + PartialEq + Clone> Matcher<&'a [T]> for Contains<T> {
         Some(idx) => {
           rem.remove(idx);
         }
-        None => return Err(format!("was {}", Pretty(&actual))),
+        None => return Err(format!("was {}", Pretty(actual))),
       }
     }
 
@@ -88,7 +88,7 @@ impl<'a, T: fmt::Debug + PartialEq + Clone> Matcher<&'a [T]> for Contains<T> {
     if self.in_order && !contains_in_order(actual, &self.items) {
       return Err(format!(
         "{} does not contain {} in order",
-        Pretty(&actual),
+        Pretty(actual),
         Pretty(&self.items)
       ));
     }

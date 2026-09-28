@@ -20,12 +20,12 @@ impl fmt::Display for Empty {
   }
 }
 
-impl<'a, T: fmt::Debug> Matcher<&'a [T]> for Empty {
+impl<T: fmt::Debug> Matcher<&[T]> for Empty {
   fn matches(&self, actual: &[T]) -> MatchResult {
     if actual.is_empty() {
       success()
     } else {
-      Err(format!("was {}", Pretty(&actual)))
+      Err(format!("was {}", Pretty(actual)))
     }
   }
 }

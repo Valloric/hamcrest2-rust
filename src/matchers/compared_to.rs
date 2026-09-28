@@ -36,7 +36,7 @@ impl<T: fmt::Debug> fmt::Display for ComparedTo<T> {
       CompareOperation::GreaterThan => ">",
     };
 
-    write!(f, "{} {:?}", operation, &self.right_hand_side)
+    write!(f, "{} {:?}", operation, self.right_hand_side)
   }
 }
 

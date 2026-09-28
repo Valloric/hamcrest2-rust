@@ -26,7 +26,7 @@ impl fmt::Display for OfLen {
   }
 }
 
-impl<'a, T> Matcher<&'a [T]> for OfLen {
+impl<T> Matcher<&[T]> for OfLen {
   fn matches(&self, actual: &[T]) -> MatchResult {
     if self.len == actual.len() {
       success()
